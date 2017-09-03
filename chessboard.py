@@ -6,6 +6,9 @@ except:
     from tkinter import *
 from math import atan2
 from copy import deepcopy
+import pygame
+
+pygame.init()
 
 DIRECTIONS = [(1, 0), (1, 1), (0, 1), (-1, 1),  # straight lines
               (-1, 0), (-1, -1), (0, -1), (1, -1),
@@ -125,9 +128,14 @@ class GameBoard(tk.Frame):
         y1=self.selection_square1//8
         x2=self.selection_square2%8
         y2=self.selection_square2//8
-        if (state[self.selection_square1]=='n1' or state[self.selection_square1]=='n2' or state[self.selection_square1]=='N1' or state[self.selection_square1]=='N2'):
+        if (state[self.selection_square1] in {'n1','n2','N1','N2'}):
             if(state[self.selection_square2]!='null'):
+                pygame.mixer.music.load("capture1.ogg")
+                pygame.mixer.music.play()
                 self.deletepiece()
+            else:
+                pygame.mixer.music.load("move1.ogg")
+                pygame.mixer.music.play()
             return('success')
         else:
             diff=self.selection_square2-self.selection_square1
@@ -160,15 +168,19 @@ class GameBoard(tk.Frame):
                 for k in state[self.selection_square1]:
                     if((k=='p' or k=='P') and (facter==8 or facter==-8)):
                         return('failure')
-                if(state[self.selection_square2]=='k'):
+                if state[self.selection_square2]=='k':
                     print "White Won The match!!"
-                elif(state[self.selection_square2]=='K'):
+                elif state[self.selection_square2]=='K':
                     print "Black Won The match!!"
                 self.deletepiece()
+                pygame.mixer.music.load("capture1.ogg")
+                pygame.mixer.music.play()
             else:
                 for k in state[self.selection_square1]:
                     if((k=='p' or k=='P') and (facter in {7,9,-7,-9})):
                         return('failure')
+                pygame.mixer.music.load("move1.ogg")
+                pygame.mixer.music.play()
             return('success')
 
 
@@ -193,6 +205,9 @@ class GameBoard(tk.Frame):
                         state[self.selection_square1]='null'
                         self.move_number=self.move_number+1
                         return 'task_completed'
+                    
+        pygame.mixer.music.load("invalid.ogg")
+        pygame.mixer.music.play()
 
 
     def highlighter(self, event):
@@ -282,6 +297,8 @@ if __name__ == "__main__":
     board = GameBoard(left)
     board.pack(side="top", fill="both", expand="true", padx=2, pady=2)
     left.pack()
+    pygame.mixer.music.load("start1.ogg")
+    pygame.mixer.music.play()
     #Initialisation of pieces...
     #for black pieces
     k = tk.PhotoImage(file="bk.png")
