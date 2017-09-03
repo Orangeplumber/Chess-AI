@@ -157,7 +157,18 @@ class GameBoard(tk.Frame):
                     return('failure')
                 i=i+facter
             if(state[self.selection_square2]!='null'):
+                for k in state[self.selection_square1]:
+                    if((k=='p' or k=='P') and (facter==8 or facter==-8)):
+                        return('failure')
+                if(state[self.selection_square2]=='k'):
+                    print "White Won The match!!"
+                elif(state[self.selection_square2]=='K'):
+                    print "Black Won The match!!"
                 self.deletepiece()
+            else:
+                for k in state[self.selection_square1]:
+                    if((k=='p' or k=='P') and (facter in {7,9,-7,-9})):
+                        return('failure')
             return('success')
 
 
@@ -193,7 +204,7 @@ class GameBoard(tk.Frame):
             self.selection_square1=self.selection_row*8+self.selection_col
             for name in self.pieces:
                 if(self.pieces[name][0]==self.selection_row and self.pieces[name][1]==self.selection_col):
-                    if((name.islower() and self.move_number%2==1) or (name.isupper() and self.move_number%2==0)):
+                    if((name.islower() and self.move_number%2==0) or (name.isupper() and self.move_number%2==1)):
                         self.selected_piece=name
                         x1 = (self.selection_col * self.size)
                         y1 = (self.selection_row * self.size)
