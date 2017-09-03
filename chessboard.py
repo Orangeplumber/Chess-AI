@@ -89,6 +89,7 @@ state=list()
 for i in range(64):
     state.append('null')
 imagestack=dict()
+
 class GameBoard(tk.Frame):
     def __init__(self, parent, rows=8, columns=8, size=85, color1="white", color2="black"):
         '''size is the size of a square, in pixels'''
@@ -105,6 +106,7 @@ class GameBoard(tk.Frame):
         self.selection_square2=0
         self.selection_row=0
         self.selection_col=0
+        self.move_number=1
         canvas_width = columns * size+20
         canvas_height = rows * size+20
 
@@ -178,6 +180,7 @@ class GameBoard(tk.Frame):
                         self.placepiece(self.selected_piece,self.selection_square2//8,self.selection_square2%8)
                         state[self.selection_square2]=self.selected_piece
                         state[self.selection_square1]='null'
+                        self.move_number=self.move_number+1
                         return 'task_completed'
 
 
@@ -190,14 +193,15 @@ class GameBoard(tk.Frame):
             self.selection_square1=self.selection_row*8+self.selection_col
             for name in self.pieces:
                 if(self.pieces[name][0]==self.selection_row and self.pieces[name][1]==self.selection_col):
-                    self.selected_piece=name
-                    x1 = (self.selection_col * self.size)
-                    y1 = (self.selection_row * self.size)
-                    x2 = x1 + self.size
-                    y2 = y1 + self.size
-                    self.canvas.create_rectangle(x1+5, y1+5, x2+5, y2+5, fill="red", tags="square")
-                    self.canvas.tag_lower("square")
-                    self.count=self.count+1
+                    if((name.islower() and self.move_number%2==1) or (name.isupper() and self.move_number%2==0)):
+                        self.selected_piece=name
+                        x1 = (self.selection_col * self.size)
+                        y1 = (self.selection_row * self.size)
+                        x2 = x1 + self.size
+                        y2 = y1 + self.size
+                        self.canvas.create_rectangle(x1+5, y1+5, x2+5, y2+5, fill="red", tags="square")
+                        self.canvas.tag_lower("square")
+                        self.count=self.count+1
 
         else:
             if((self.selection_row+self.selection_col)%2==0):
