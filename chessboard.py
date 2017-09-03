@@ -124,6 +124,8 @@ class GameBoard(tk.Frame):
         x2=self.selection_square2%8
         y2=self.selection_square2//8
         if (state[self.selection_square1]=='n1' or state[self.selection_square1]=='n2' or state[self.selection_square1]=='N1' or state[self.selection_square1]=='N2'):
+            if(state[self.selection_square2]!='null'):
+                self.deletepiece()
             return('success')
         else:
             diff=self.selection_square2-self.selection_square1
