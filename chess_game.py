@@ -7,6 +7,7 @@ except:
 from math import atan2
 from copy import deepcopy
 import pygame
+import time 
 
 pygame.init()
 
@@ -92,6 +93,9 @@ state=list()
 for i in range(64):
     state.append('null')
 imagestack=dict()
+# pawn_movement=list()
+# for i in {'p1','p2','p3','p4','p5','p6','p7','p8','P1','P2','P3','P4','P5','P6','P7','P8'}:
+#     pawn_movement[i]=0
 
 class GameBoard(tk.Frame):
     def __init__(self, parent, rows=8, columns=8, size=85, color1="white", color2="black"):
@@ -130,12 +134,14 @@ class GameBoard(tk.Frame):
         y2=self.selection_square2//8
         if (state[self.selection_square1] in {'n1','n2','N1','N2'}):
             if(state[self.selection_square2]!='null'):
+                self.deletepiece()
                 pygame.mixer.music.load("capture1.ogg")
                 pygame.mixer.music.play()
-                self.deletepiece()
+                time.sleep(0.250)
             else:
                 pygame.mixer.music.load("move1.ogg")
                 pygame.mixer.music.play()
+                time.sleep(0.250)
             return('success')
         else:
             diff=self.selection_square2-self.selection_square1
@@ -175,12 +181,14 @@ class GameBoard(tk.Frame):
                 self.deletepiece()
                 pygame.mixer.music.load("capture1.ogg")
                 pygame.mixer.music.play()
+                time.sleep(0.25)
             else:
                 for k in state[self.selection_square1]:
                     if((k=='p' or k=='P') and (facter in {7,9,-7,-9})):
                         return('failure')
                 pygame.mixer.music.load("move1.ogg")
                 pygame.mixer.music.play()
+                time.sleep(0.250)
             return('success')
 
 
@@ -291,7 +299,7 @@ if __name__ == "__main__":
     root = Tk()
     # root.wm_iconbitmap(r'/home/harnish/Desktop/ChessPro0/chessicons_small/index.ico')
     root.wm_title('ChessPro0')
-    labelframe = LabelFrame(root,text="Do Your Best to beat Jarvis!!",foreground="red",font="papyrus",relief="sunken")
+    labelframe = LabelFrame(root,text="Do Your Best to defeat Jarvis!!",foreground="red",font="papyrus",relief="sunken")
     labelframe.pack(fill="both", expand="yes")
     left = Label(labelframe, text="Try Your Best to Defeat Jarvis!!")
     board = GameBoard(left)
@@ -299,6 +307,7 @@ if __name__ == "__main__":
     left.pack()
     pygame.mixer.music.load("start1.ogg")
     pygame.mixer.music.play()
+    time.sleep(0.5)
     #Initialisation of pieces...
     #for black pieces
     k = tk.PhotoImage(file="bk.png")
