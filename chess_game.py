@@ -176,6 +176,9 @@ class GameBoard(tk.Frame):
                         return('failure')
                 if state[self.selection_square2]=='k':
                     print "White Won The match!!"
+                    pygame.mixer.music.load("win2.ogg")
+                    pygame.mixer.music.play()
+                    time.sleep(1)
                 elif state[self.selection_square2]=='K':
                     print "Black Won The match!!"
                 self.deletepiece()
