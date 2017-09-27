@@ -6,3 +6,9 @@ Task:
 ~Moves validation:Done
 ~Two Player game:Done 
 ~Chess AI:Pending.....
+
+Pre-installation:
+~Commnads:
+1) pip install Tkinter
+2) pip install pygame
+3) pip install time
