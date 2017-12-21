@@ -215,8 +215,7 @@ class GameBoard(tk.Frame):
                         state[self.selection_square2]=self.selected_piece
                         state[self.selection_square1]='null'
                         self.move_number=self.move_number+1
-                        return 'task_completed'
-                    
+                        return 'task_completed'                    
         pygame.mixer.music.load("invalid.ogg")
         pygame.mixer.music.play()
 

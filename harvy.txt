@@ -1,0 +1,13 @@
+tasks for harvy
+~we are not concerned with the future of the chess game. Rather we will not take game tree into consideration.
+~we cannot apply game tree for harvy because if we do so than it will be damn slow.
+~a function which can list the possible moves in a dict of a particular state.
+~neural net:
+	--input:12 vectors of the size of 64.
+	--3 hidden layers of 8 neurons each.
+	--output:6 neurons:
+				--3 describing win, draw and loss finally in the game of the Black Player.
+				--another 3 describing instant win, draw and loss of the the Black Player.
+	--Nodes in each layer 12*64:12:8:8:6. 
+~training:
+	--first of all a code is needed to understand and save the input 12*64 vector and output vector of 6.
