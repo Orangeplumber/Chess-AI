@@ -10,6 +10,6 @@
 
 ### Pre-installation: ###
 - Commnads:
-  - pip install Tkinter
-  - pip install pygame
-  - pip install time
+  - ``pip install Tkinter``
+  - ``pip install pygame``
+  - ``pip install time``
