@@ -1,13 +1,14 @@
 # Chess-AI
-# Task:
+### Task: ###
 - To Build a chess game with AI as an opponent!
 - AI with Minimax and alphs-beta-pruning and Evaluation function calculation by Deep-learning.
 - ChessBoard:Done
 - Moves validation:Done
 - Two Player game:Done 
-- Chess AI:Pending.....
+- Chess AI:Done
+- Training:Left
 
-# Pre-installation:
+### Pre-installation: ###
 - Commnads:
   - pip install Tkinter
   - pip install pygame
